@@ -4,11 +4,11 @@ from pyspark.sql.types import *
 from pyspark.sql.functions import *
 import pandas as pd
 import os
+import json
 
 
 def parserByReviewsNb():
     spark = SparkSession.builder.getOrCreate();  # creating a Sparksession
-    sqlContext = SQLContext(spark)
 
     file_list = os.listdir("../yelp_dataset/open_business_reviews.json")
     pyspark_df_review = spark.read.json("../yelp_dataset/open_business_reviews.json/" + file_list[0])
@@ -46,6 +46,7 @@ def removeClosedBusiness():
     df_business = spark.read.json("../yelp_dataset/yelp_academic_dataset_business.json")
 
     df_business.printSchema()
+    df_business = df_business.drop("attributes")
 
     df_business.createOrReplaceTempView("business")
     sqlDF = spark.sql("SELECT * FROM business WHERE is_open = 1")
@@ -73,6 +74,24 @@ def removeClosedBusinessReviews():
 
     reviews_filter.write.format('json').save('open_business_reviews.json')
     pass
+
+
+def getOpenBusinessClients():
+    df_reviews = pd.DataFrame()
+    file_list = os.listdir("../yelp_dataset/open_business_reviews.json")
+
+    for file in file_list:
+        # loading the business into a dataframe
+        df = pd.read_json("../yelp_dataset/open_business_reviews.json/" + file, lines=True)
+        df_reviews = pd.concat([df_reviews, df])
+
+    dic = {elt: [] for elt in list(df_reviews.business_id.values)}
+
+    for i in range(len(df_reviews)):
+        dic[df_reviews.loc[i].business_id].append(df_reviews.loc[i].user_id)
+
+    with open('../business_users.json', 'w') as f:
+        json.dump(dic, f, indent=4)
 
 
 def getEliteWithFriends():
@@ -137,4 +156,4 @@ def getUsersWithFriends():
     pass
 
 
-getEliteWithEliteFriends()
+getOpenBusinessClients()
