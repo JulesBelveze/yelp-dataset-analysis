@@ -85,12 +85,44 @@ def getOpenBusinessClients():
         df = pd.read_json("../yelp_dataset/open_business_reviews.json/" + file, lines=True)
         df_reviews = pd.concat([df_reviews, df])
 
-    dic = {elt: [] for elt in list(df_reviews.business_id.values)}
+    dic = {elt: [] for elt in list(df_reviews.user_id.values)}
 
     for i in range(len(df_reviews)):
-        dic[df_reviews.loc[i].business_id].append(df_reviews.loc[i].user_id)
+        dic[df_reviews.loc[i].user_id].append(df_reviews.loc[i].business_id)
 
-    with open('../business_users.json', 'w') as f:
+    with open('../yelp_dataset/business_users.json', 'w') as f:
+        json.dump(dic, f, indent=4)
+
+
+def getOpenBusinessEliteClients():
+    df_users = pd.DataFrame()
+    df_reviews = pd.DataFrame()
+
+    file_reviews_list = os.listdir("../yelp_dataset/open_business_reviews.json")
+    file_user_list = os.listdir("../yelp_dataset/elite_users_with_friends.json")
+
+    for file in file_reviews_list:
+        # loading the business into a dataframe
+        df = pd.read_json("../yelp_dataset/open_business_reviews.json/" + file, lines=True)
+        df_reviews = pd.concat([df_reviews, df])
+
+    for file in file_user_list:
+        # loading the elite users into a dataframe
+        df = pd.read_json("../yelp_dataset/elite_users_with_friends.json/" + file, lines=True)
+        df_users = pd.concat([df_users, df])
+
+    dic = {}
+    # dic = {elt: [] for elt in list(df_reviews.user_id.values) if df_users[df_users["user_id"] == elt].elite.values != []}
+
+    for i in range(len(df_reviews)):
+        user = df_reviews.loc[i].user_id
+        if df_users[df_users['user_id'] == user].elite.values != 'None':
+            try:
+                dic[df_reviews.loc[i].user_id].append(df_reviews.loc[i].business_id)
+            except KeyError:
+                dic[df_reviews.loc[i].user_id] = [df_reviews.loc[i].business_id]
+
+    with open('../yelp_dataset/business_elite_users.json', 'w') as f:
         json.dump(dic, f, indent=4)
 
 
@@ -157,3 +189,4 @@ def getUsersWithFriends():
 
 
 getOpenBusinessClients()
+getOpenBusinessEliteClients()
