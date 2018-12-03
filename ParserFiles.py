@@ -5,16 +5,20 @@ from pyspark.sql.functions import *
 import pandas as pd
 import os
 import json
+import FindEliteUsers.py
+
+test = True
+dir_path = '../yelp_dataset/'
 
 
 def parserByReviewsNb():
     spark = SparkSession.builder.getOrCreate();  # creating a Sparksession
 
-    file_list = os.listdir("../yelp_dataset/open_business_reviews.json")
-    pyspark_df_review = spark.read.json("../yelp_dataset/open_business_reviews.json/" + file_list[0])
+    file_list = os.listdir(dir_path + "open_business_reviews.json")
+    pyspark_df_review = spark.read.json(dir_path + "open_business_reviews.json/" + file_list[0])
 
     for file in file_list[1:]:
-        df = spark.read.json("../yelp_dataset/open_business_reviews.json/" + file)
+        df = spark.read.json(dir_path + "open_business_reviews.json/" + file)
         pyspark_df_review = pyspark_df_review.union(df)
 
     # p_schema = StructType([StructField('business_id', StringType(), True),
@@ -43,7 +47,7 @@ def parserByReviewsNb():
 
 def removeClosedBusiness():
     spark = SparkSession.builder.getOrCreate();  # creating a Sparksession
-    df_business = spark.read.json("../yelp_dataset/yelp_academic_dataset_business.json")
+    df_business = spark.read.json(dir_path + "yelp_academic_dataset_business.json")
 
     df_business.printSchema()
     df_business = df_business.drop("attributes")
@@ -69,12 +73,11 @@ def removeClosedBusinessReviews():
 
     business_list = list(set(list(df_business.business_id.values)))
 
-    spark_df_review = spark.read.json("../yelp_dataset/yelp_academic_dataset_review.json")
+    spark_df_review = spark.read.json(dir_path + "yelp_academic_dataset_review.json")
     reviews_filter = spark_df_review.filter(spark_df_review['business_id'].isin(business_list) == True)
 
     reviews_filter.write.format('json').save('open_business_reviews.json')
     pass
-
 
 def getOpenBusinessClients():
     df_reviews = pd.DataFrame()
@@ -140,7 +143,7 @@ def getEliteWithFriends():
     # spark_df_users.write.format("json").save("elite_users_with_friends.json")
     pass
 
-
+  
 def getEliteWithEliteFriends():
     def filterFriend(elt, l):
         print(elt)
@@ -149,29 +152,49 @@ def getEliteWithEliteFriends():
     spark = SparkSession.builder.getOrCreate();
     sqlContext = SQLContext(spark);
 
-    spark_df_users = spark.read.json("../yelp_dataset/yelp_academic_dataset_user.json")
+    #The following line extracts the elite users with friends
+    spark_df_users = getEliteWithFriends()
 
-    spark_df_users = spark_df_users.where("friends != 'None' AND elite != 'None'")
-    spark_df_users = spark_df_users.drop("average_stars", "compliment_cool", "compliment_cute", "compliment_funny",
-                                         "compliment_hot", "compliment_list", "compliment_more", "compliment_note",
-                                         "compliment_photos", "compliment_plain", "compliment_profile",
-                                         "compliment_writer", "cool", "funny", "useful", "yelping_since")
-
+    #Replace the column 'friends' with an array containing the friends
     spark_df_users = spark_df_users.withColumn("friends", split(col("friends"), "\\|"))
 
-    list_users = []
+    elite_users = spark_df_users.select('user_id').take(spark_df_users.count())
+    elite_users_dict = {user[0] for user in elite_users}
+    # print(elite_users_dict)
+    elite_friends = {}
+    i = 0
 
-    # for i in list_users.collect():
-    #     print(str(i.friends))
-    def removePunctuation(df, column):
-        cleanString = df.select(trim(lower(col('user_id'))).alias('user_id'))
-        cleanString = cleanString.select(filterFriend(user_id, ['Ha3iJu77CxlrFm-vQRs_8g']).alias('user_id'))
+    for user in elite_users_dict:
+        # print(user)
+        df_friends = spark_df_users.where(spark_df_users.user_id == user).select(spark_df_users.friends)
+        friend_dict = {}
+        for friend_list in df_friends.take(df_friends.count())[0]:
+            #print(friend_list)
+            for friend in friend_list:
+                #print(friend)
+                friend_dict = {f.strip() for f in friend.split(',')}
 
-        return cleanString
+        #print('All friends', friend_dict)
+        elite_friends[user] = {friend for friend in friend_dict if friend in elite_users_dict}
 
-    result = removePunctuation(spark_df_users, 'user_id')
+        #print('Only elite friends', elite_friends[user])
+        with open("../elite_friends.json", "a") as file:
+            file.write('%s:%s\n' % (user, elite_friends[user]))
+        i += 1
+        print(i)
 
-    pass
+    print('End of process')
+        # TO RECOVER DATA FROM THE PREVIUOS FILE
+        # data = dict()
+        # with open("../elite_friends.json") as raw_data:
+            # for item if raw_data:
+    #         if ':' in item:
+    #             key,value = item.split(':', 1)
+    #             data[key]=value
+    #         else:
+    #             pass # deal with bad lines of text here
+        #
+        pass
 
 
 def getUsersWithFriends():
