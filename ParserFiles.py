@@ -4,6 +4,7 @@ from pyspark.sql.types import *
 from pyspark.sql.functions import *
 import pandas as pd
 import os
+import json
 import FindEliteUsers.py
 
 test = True
@@ -12,7 +13,6 @@ dir_path = '../yelp_dataset/'
 
 def parserByReviewsNb():
     spark = SparkSession.builder.getOrCreate();  # creating a Sparksession
-    sqlContext = SQLContext(spark)
 
     file_list = os.listdir(dir_path + "open_business_reviews.json")
     pyspark_df_review = spark.read.json(dir_path + "open_business_reviews.json/" + file_list[0])
@@ -50,6 +50,7 @@ def removeClosedBusiness():
     df_business = spark.read.json(dir_path + "yelp_academic_dataset_business.json")
 
     df_business.printSchema()
+    df_business = df_business.drop("attributes")
 
     df_business.createOrReplaceTempView("business")
     sqlDF = spark.sql("SELECT * FROM business WHERE is_open = 1")
@@ -78,7 +79,71 @@ def removeClosedBusinessReviews():
     reviews_filter.write.format('json').save('open_business_reviews.json')
     pass
 
+def getOpenBusinessClients():
+    df_reviews = pd.DataFrame()
+    file_list = os.listdir("../yelp_dataset/open_business_reviews.json")
 
+    for file in file_list:
+        # loading the business into a dataframe
+        df = pd.read_json("../yelp_dataset/open_business_reviews.json/" + file, lines=True)
+        df_reviews = pd.concat([df_reviews, df])
+
+    dic = {elt: [] for elt in list(df_reviews.user_id.values)}
+
+    for i in range(len(df_reviews)):
+        dic[df_reviews.loc[i].user_id].append(df_reviews.loc[i].business_id)
+
+    with open('../yelp_dataset/business_users.json', 'w') as f:
+        json.dump(dic, f, indent=4)
+
+
+def getOpenBusinessEliteClients():
+    df_users = pd.DataFrame()
+    df_reviews = pd.DataFrame()
+
+    file_reviews_list = os.listdir("../yelp_dataset/open_business_reviews.json")
+    file_user_list = os.listdir("../yelp_dataset/elite_users_with_friends.json")
+
+    for file in file_reviews_list:
+        # loading the business into a dataframe
+        df = pd.read_json("../yelp_dataset/open_business_reviews.json/" + file, lines=True)
+        df_reviews = pd.concat([df_reviews, df])
+
+    for file in file_user_list:
+        # loading the elite users into a dataframe
+        df = pd.read_json("../yelp_dataset/elite_users_with_friends.json/" + file, lines=True)
+        df_users = pd.concat([df_users, df])
+
+    dic = {}
+    # dic = {elt: [] for elt in list(df_reviews.user_id.values) if df_users[df_users["user_id"] == elt].elite.values != []}
+
+    for i in range(len(df_reviews)):
+        user = df_reviews.loc[i].user_id
+        if df_users[df_users['user_id'] == user].elite.values != 'None':
+            try:
+                dic[df_reviews.loc[i].user_id].append(df_reviews.loc[i].business_id)
+            except KeyError:
+                dic[df_reviews.loc[i].user_id] = [df_reviews.loc[i].business_id]
+
+    with open('../yelp_dataset/business_elite_users.json', 'w') as f:
+        json.dump(dic, f, indent=4)
+
+
+def getEliteWithFriends():
+    spark = SparkSession.builder.getOrCreate();
+
+    spark_df_users = spark.read.json("../yelp_dataset/yelp_academic_dataset_user.json")
+    spark_df_users.printSchema()
+
+    spark_df_users = spark_df_users.where("friends != 'None' AND elite != 'None'")
+    spark_df_users = spark_df_users.drop("average_stars", "compliment_cool", "compliment_cute", "compliment_funny",
+                                         "compliment_hot", "compliment_list", "compliment_more", "compliment_note",
+                                         "compliment_photos", "compliment_plain", "compliment_profile",
+                                         "compliment_writer", "cool", "funny", "useful", "yelping_since")
+    # spark_df_users.write.format("json").save("elite_users_with_friends.json")
+    pass
+
+  
 def getEliteWithEliteFriends():
     def filterFriend(elt, l):
         print(elt)
@@ -146,4 +211,5 @@ def getUsersWithFriends():
     pass
 
 
-getEliteWithEliteFriends()
+getOpenBusinessClients()
+getOpenBusinessEliteClients()
