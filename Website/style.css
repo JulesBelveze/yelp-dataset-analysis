@@ -2,6 +2,10 @@
     margin-top: 10px;
 }
 
+.pt-1{
+    padding-top: 10px;
+}
+
 .mt-3{
     margin-top: 30px;
 }
@@ -31,4 +35,14 @@
 li a:hover{
     background-color: darkgray !important;
     color: white !important;
+}
+
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+
+.mh{
+    min-height: 98px;
 }
