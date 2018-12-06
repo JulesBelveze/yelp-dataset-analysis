@@ -42,7 +42,7 @@
         <div class="row featurette" id="overview">
             <div class="col-md-5 col-md-offset-1">
                 <h2 class="featurette-heading">Overview of our project</h2>
-                <p class="lead">The video on the right side is explaining the main idea of our project and why we chose to do that. </p>
+                <p class="lead">The video on the right side is explaining the main idea of our project and why we chose to do that. By scrolling down you will discover a more detailed explanation about the work we have done and the tools we have used. </p>
             </div>
             <div class="col-md-5">
                 <iframe src="https://player.vimeo.com/video/301716009" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -53,11 +53,11 @@
         
         <div class="row featurette" id="network">
             <div class="col-md-5 col-md-offset-1">
-                <img src="network_business.png" class="img-responsive">
+                <img src="network_business_2017.png" class="img-responsive">
             </div>
             <div class="col-md-5">
                 <h2 class="featurette-heading">Networks</h2>
-                <p class="lead">The video on the right side is explaining the main idea of our project and why we chose to do that. </p>
+                <p class="lead">On this section you will be able to discover our different work on networks using the Yelp dataset. </p>
             </div>
         </div>
         
@@ -66,7 +66,7 @@
         <div class="row featurette" id="sentiments">
             <div class="col-md-5 col-md-offset-1">
                 <h2 class="featurette-heading">Sentiment analysis</h2>
-                <p class="lead">The video on the right side is explaining the main idea of our project and why we chose to do that. </p>
+                <p class="lead">This web page is mainly dealing with sentiments analysis on the users' comments and the words they have used. We have implemented dynamical animations so that the user will be able to compare the differences between business' categories. </p>
             </div>
             <div class="col-md-5">
                 <img src="happiness_comparison_categories.png" class="img-responsive">
@@ -80,8 +80,29 @@
                 <img src="map.png" class="img-responsive">
             </div>
             <div class="col-md-5">
-                <h2 class="featurette-heading">Find restaurants</h2>
+                <h2 class="featurette-heading">Find your shop !</h2>
                 <p class="lead">The video on the right side is explaining the main idea of our project and why we chose to do that. </p>
+            </div>
+        </div>
+        
+        <hr class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="card col-md-8 col-md-offset-2">
+                <div class="card-header">
+                    <h2>Detailed work</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">As mentionned in the video, we have had to face a huge amount of <a href="https://www.yelp.com/dataset/download" target="_blank">data</a> (approximately 8GB). We have been working with three different .json files:
+                    <li>one containing the business data including location data, attributes, and categories. (business.json)</li>
+                    <li>one containing full review text data including the user_id that wrote the review and the business_id the review is written for. (review.json)</li>
+                    <li>one containing the user data including the user's friend mapping and all the metadata associated with the user. (user.json)</li></p>
+                    
+                    <p class="card-text">We have chosen that dataset because it is more relevant for us to rank business according to comments than according to "stars". Actually, a user can grade a business by giving it an certain amount of stars without really how relevant his mark is going to be. When a user leave a comment he takes some time to explain his feeling in his own words. Then we analyze that comment to end up with a "happiness mark".</p>
+                        
+                    <p class="card-text">That have lead us to use new tools in order to filter and to parse the collected data. To do so, we have used the Spark Python API (PySpark) which is a fast and general engine for large-scale data processing. Thanks to it we have been able to reduce the files' size regarding relevant filters. </p>
+                    
+                    <p class="card-text"></p>
+                </div>
             </div>
         </div>
         
