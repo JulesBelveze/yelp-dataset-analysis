@@ -145,5 +145,6 @@ def getUsersWithFriends():
     pass
 
 
-getOpenBusinessClients()
-getOpenBusinessEliteClients()
+if __name__=="__main__":
+    getOpenBusinessClients()
+    getOpenBusinessEliteClients()

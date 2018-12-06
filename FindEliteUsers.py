@@ -19,7 +19,7 @@ def getEliteUsers():
 
     el_u_total = spark_df_users.count()
     print("Total elite users: ", el_u_total)
-    spark_df_users = spark_df_users.where(spark_df_users.elite.like('2017'))
+    spark_df_users = spark_df_users.where(spark_df_users.elite.like('2016'))
     spark_df_users = spark_df_users.where(spark_df_users.fans > 10)
     spark_df_users = spark_df_users.where(spark_df_users.review_count > 50)
     spark_df_users.sort('fans', ascending=True).show()
@@ -31,7 +31,7 @@ def getEliteUsers():
     i = 0
     for el_u in elite_users_array:
         user = el_u[0]
-        with open("../elite_users.json", "a") as file:
+        with open("../elite_users_2016.json", "a") as file:
             file.write('%s\n' % user)
         i += 1
         print(i/el_u_filtered * 100, '%', end='\r')
