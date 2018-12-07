@@ -17,10 +17,10 @@ def main():
     dic = df.groupby('user_id')['business_id'].apply(lambda x: x.tolist()).to_dict()
 
     m = Basemap(projection='merc',
-                llcrnrlon=-130,  # -110 to get all the US
-                llcrnrlat=22,  # 22 to get all the US
-                urcrnrlon=-66,  # -66 to get all the US
-                urcrnrlat=50,  # 50 to get all the US
+                llcrnrlon=-115.4,  # -130 to get all the US
+                llcrnrlat=35.9,  # 22 to get all the US
+                urcrnrlon=-114.9,  # -66 to get all the US
+                urcrnrlat=36.3,  # 50 to get all the US
                 lat_ts=0,
                 resolution='l',
                 suppress_ticks=True)
@@ -42,9 +42,10 @@ def main():
     print(len(G.edges()))
 
     node_size = [G.degree(elt) * 10 for elt in list(G.nodes())]
+    print(node_size)
     node_color = aggregateColors(node_size)
     nx.draw_networkx_nodes(G=G, pos=pos, node_list=G.nodes(), node_color=node_color, alpha=0.8, node_size=node_size)
-    nx.draw_networkx_edges(G=G, pos=pos, edge_color='g', alpha=0.2, arrows=False)
+    nx.draw_networkx_edges(G=G, pos=pos, edge_color='b', alpha=0.2, arrows=False)
 
     m.drawcountries(linewidth=1.5)
     m.drawstates(linewidth=0.2)
@@ -60,10 +61,10 @@ def loadData():
 
     df_users_business = pd.DataFrame()
     # loading json file with key users and values business they have written a comment about
-    folder = os.listdir("../yelp_dataset/elite_and_business.json")
+    folder = os.listdir("../yelp_dataset/elite_2017_and_business.json")
 
     for file in folder:
-        df = pd.read_json("../yelp_dataset/elite_and_business.json/" + file, lines=True)
+        df = pd.read_json("../yelp_dataset/elite_2017_and_business.json/" + file, lines=True)
         df_users_business = pd.concat([df_users_business, df])
 
     # filtering the business that have less than 100 elite visitors
@@ -80,7 +81,7 @@ def loadData():
         long.append(longitude)
         lat.append(latitude)
 
-    # df_users_business = df_users_business[:1000]
+    # df_users_business = df_users_business[:2000]
     df_users_business['long'] = pd.Series(long, index=df_users_business.index)
     df_users_business['lat'] = pd.Series(lat, index=df_users_business.index)
 
@@ -94,14 +95,12 @@ def aggregateColors(size_list):
 
     color_list = []
     for elt in size_list:
-        x = int(255 * (elt - mini) / (maxi - mini))
-        color_list.append(((255 - x) / 255, x / 255, 0))
-        # if elt <= med:
-        #     x = int(255*(elt - mini)/(med - mini))
-        #     color_list.append((255, x, 0, 0.8))
-        # else:
-        #     x = int(255*(elt - med)/(maxi - med))
-        #     color_list.append((255 - x, 255, 0, 0.8))
+        if elt <= med:
+            x = int(255*(elt - mini)/(med+1 - mini))
+            color_list.append((1, x/255, 0))
+        else:
+            x = int(255*(elt - med)/(maxi - med))
+            color_list.append(((255 - x)/255, 1, 0))
 
     return color_list
 

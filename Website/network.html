@@ -71,19 +71,34 @@
         </div>
                 
         <div class="row">
-            <div class="btn-group btn-group-toggle col-md-10 col-md-offset-1" data-toggle="buttons">
-                <label class="btn btn-choice active" data="network_business.png">
+            <div class="btn-group btn-group-toggle col-md-5 col-md-offset-1" data-toggle="buttons">
+                <label class="btn btn-choice-community active" data=".png">
                     <input type="radio" name="options" autocomplete="off"> Without communities
                 </label>
-                <label class="btn btn-choice" data="network_business_communities_2017.png">
+                <label class="btn btn-choice-community" data="_communities.png">
                     <input type="radio" name="options" autocomplete="off"> With communities
+                </label>
+            </div>
+            
+            <div class="btn-group btn-group-toggle col-md-5 col-md-offset-1" data-toggle="buttons">
+                <label class="btn btn-choice-year" data="networks_images/network_business_2014">
+                    <input type="radio" name="options" autocomplete="off"> 2014
+                </label>
+                <label class="btn btn-choice-year" data="networks_images/network_business_2015">
+                    <input type="radio" name="options" autocomplete="off"> 2015
+                </label>
+                <label class="btn btn-choice-year" data="networks_images/network_business_2016">
+                    <input type="radio" name="options" autocomplete="off"> 2016
+                </label>
+                <label class="btn btn-choice-year active" data="networks_images/network_business_2017">
+                    <input type="radio" name="options" autocomplete="off"> 2017
                 </label>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <img class="card-img img-responsive" id="network_img" src="network_business_2017.png">
+                <img class="card-img img-responsive" id="network_img" src="networks_images/network_business_2017.png">
             </div>
         </div>
     </body>
@@ -103,8 +118,14 @@
 
 
 <script>
-    $(".btn-choice").on("click",function(){
-        $("#network_img").attr("src", $(this).attr("data"))
+    $(".btn-choice-community").on("click",function(){
+        var img_network = $(".btn-choice-year.active").attr("data") + $(this).attr("data");
+        $("#network_img").attr("src", img_network);
+    });
+    
+    $(".btn-choice-year").on("click",function(){
+        var img_network = $(this).attr("data") + $(".btn-choice-community.active").attr("data");
+        $("#network_img").attr("src", img_network);
     });
 </script>
 
