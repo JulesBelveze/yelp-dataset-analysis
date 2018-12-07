@@ -18,7 +18,7 @@
     margin-bottom: 10px;
 }
 
-.btn-choice{
+.btn-choice-year, .btn-choice-community{
     background-color: #F8F8F8 !important;
     border: 1px solid lightgray;
 }

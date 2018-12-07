@@ -36,11 +36,12 @@ def filteringForNetworkBusiness():
 
     pyspark_df_reviews.createOrReplaceTempView("reviews")
 
-    df = pyspark_df_elite_users.join(pyspark_df_reviews, pyspark_df_elite_users.user_id == pyspark_df_reviews.user_id).select(pyspark_df_elite_users['user_id'], pyspark_df_reviews['business_id'])
+    df = pyspark_df_elite_users.join(pyspark_df_reviews,
+                                     pyspark_df_elite_users.user_id == pyspark_df_reviews.user_id).select(
+        pyspark_df_elite_users['user_id'], pyspark_df_reviews['business_id'])
 
-    df.write.mode('append').json("elite_and_business.json")
+    df.write.mode('append').json("elite_2017_and_business.json")
 
 
-
-
-filteringForNetworkBusiness()
+if __name__ == "__main__":
+    filteringForNetworkBusiness()
