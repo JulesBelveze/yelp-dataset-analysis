@@ -125,25 +125,39 @@
                     <h2>Network of elite users</h2>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Here is a quick animation where .....</p>
+                    <p class="card-text">Here we are focusing on the established links between users. As mentionned above you are only focusing on elite users from different years that are influent (at least 10 friends) and active (they have at least written 50 reviews). We have decided to draw this network in order pinpoint the different users communities.<br> Blue nodes represent the elite users we are considering and the red ones are regular users. When on "With Communities" mode, you can easily distinguish the communities by color.</p>
                 </div>
             </div>
         </div>
         
         <div class="row">
             <div class="btn-group btn-group-toggle col-md-5 col-md-offset-1" data-toggle="buttons">
-                <label class="btn btn-choice-community-2 active" data="networks_images/elite_users_network.png">
+                <label class="btn btn-choice-community-2 active" data=".png">
                     <input type="radio" name="options" autocomplete="off"> Without communities
                 </label>
-                <label class="btn btn-choice-community-2" data="networks_images/network_elite_users_com.png">
+                <label class="btn btn-choice-community-2" data="_com.png">
                     <input type="radio" name="options" autocomplete="off"> With communities
+                </label>
+            </div>
+            <div class="btn-group btn-group-toggle col-md-5 col-md-offset-1" data-toggle="buttons">
+                <label class="btn btn-choice-year-2" data="networks_images/elite_users_network_2014">
+                    <input type="radio" name="options" autocomplete="off"> 2014
+                </label>
+                <label class="btn btn-choice-year-2" data="networks_images/elite_users_network_2015">
+                    <input type="radio" name="options" autocomplete="off"> 2015
+                </label>
+                <label class="btn btn-choice-year-2" data="networks_images/elite_users_network_2016">
+                    <input type="radio" name="options" autocomplete="off"> 2016
+                </label>
+                <label class="btn btn-choice-year-2 active" data="networks_images/elite_users_network_2017">
+                    <input type="radio" name="options" autocomplete="off"> 2017
                 </label>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <img class="card-img img-responsive" id="network_img_2" src="networks_images/elite_users_network.png">
+                <img class="card-img img-responsive" id="network_img-2" src="networks_images/elite_users_network_2017.png">
             </div>
         </div>
     </body>
@@ -175,7 +189,13 @@
     });
     
     $(".btn-choice-community-2").on("click", function(){
-        $("#network_img_2").attr("src", $(this).attr("data"));
+        var img_network = $(".btn-choice-year-2.active").attr("data") + $(this).attr("data");
+        $("#network_img-2").attr("src", img_network);
+    });
+    
+    $(".btn-choice-year-2").on("click",function(){
+        var img_network = $(this).attr("data") + $(".btn-choice-community-2.active").attr("data");
+        $("#network_img-2").attr("src", img_network);
     });
 </script>
 

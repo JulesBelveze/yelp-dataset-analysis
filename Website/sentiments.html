@@ -48,7 +48,8 @@
                     <h2>Analyzis of sentiments in comments</h2>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Here is a quick description of....</p>
+                    <p class="card-text">This page depicts our work on comments analysis. Since the aim of our project is to rank is to rank businesses regarding the "happiness" on users' comments, we ended up with different interesting results. <br>
+                    The first chart in the below slider is representing the distribution of this happiness mark. The second one is comparing this distribution between the seven most popular business' categories. </p>
                 </div>
             </div>
         </div>
@@ -85,7 +86,10 @@
                     <h2>Sentimental comparison between two categories</h2>
                 </div>
                 <div class="card-body">
-                    <div class="form-group col-md-2">
+                    <p class="card_text">In this section you are able to compare the distribution of the happiness mark between two categories of your choice.<br> <u>Note:</u> Be aware that the y-axis is normalized so that data can be compared.</p>
+                </div>
+                <div class="card-body">
+                    <div class="form-group col-md-2 mt-3">
                         <label for="exampleFormControlSelect2">First category</label>
                         <select multiple class="form-control" id="selector1">
                             <option selected>Bars</option>
@@ -102,7 +106,7 @@
                         <img src="sentiment_charts/Bars_Nightlife.png" class="img-responsive" id="sentiment_categories">
                     </div>
                     
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2 mt-3">
                         <label for="exampleFormControlSelect2">Second category</label>
                         <select multiple class="form-control" id="selector2">
                             <option>Bars</option>
@@ -126,10 +130,15 @@
                 <div class="card-header">
                     <h2>WordClouds regarding the business's category</h2>
                 </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        This section has been implemented in order to compare the most used words in comments regarding the business' category. It comes out that words used are sensitively the same.
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="container">
+        <div class="container mt-3">
             <div class="row">
                 <div class="col-sm-6 mt-3">
                     <ul class="hide-bullets">
@@ -175,7 +184,7 @@
                                 <div class="carousel slide" id="myCarousel">
                                     <div class="carousel-inner">
                                         <div class="active item" data-slide-number="0">
-                                            <img id="active-img" src="wordclouds/Restaurants_wordcloud.png">
+                                            <img id="active-img" class="thumbnail" src="wordclouds/Restaurants_wordcloud.png">
                                         </div>
                                     </div>
                                 </div>
