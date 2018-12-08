@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     
+    <!-------------------------------------- Navigation bar --------------------------------->
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -37,19 +38,69 @@
         </nav>
     </header>
     
+    <!-------------------------------------- Page content --------------------------------->
     <body class="mt-8">
         <div class="row">
             <div class="card col-md-10 col-md-offset-1">
                 <div class="card-header">
-                    <h1>Find the restaurant that fits you!</h1>
+                    <h1>Find the shop that fits you!</h1>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">This section is gathering the work we have done on networks and sentiments analysis. We have tried to implemant a solution that will be better fitted and more significant for people without any knowledge about networks or NLP.</p>
+                    <p class="card-text">This section is gathering the work we have done on networks and sentiments analysis. We have tried to implemant a solution that will be better fitted and more significant for people without any knowledge about networks or NLP. The following map depicts all the business we have had data about. As we can see they are mostly gathered in a bunch of area. Since we are soon travelling to Phoenix we have ploted a map of this area with all the business. Each dot representing a business, the more green it is the better comments it has had (to have relevant results you are only working with shops that have more than 100 comments).</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-1">
+            <div class="col-md-5 col-md-offset-1">
+                <img src="networks_images/map_business.png" class="img-responsive">
+            </div>
+            <div class="col-md-5">
+                <img src="networks_images/map_networks_business.png" class="img-responsive">
+            </div>
+        </div>
+        
+        <hr class="col-md-8 col-md-offset-2">
+        
+        <div class="row mt-1">
+            <div class="col-md-5 col-md-offset-1">
+                <img src="networks_images/map.png" class="img-responsive">
+            </div>
+            <div class="col-md-5">
+                <img src="networks_images/map_1.png" class="img-responsive">
+            </div>
+        </div>
+        
+        <hr class="col-md-8 col-md-offset-2">
+        
+        <div class="row">
+            <div class="card col-md-10 col-md-offset-1">
+                <div class="card-header">
+                    <h3>Top ranked business !</h3>
+                </div>
+                <div class="card-body table-wrapper-scroll-y">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="txt-c">Rank</th>
+                                <th scope="col" class="txt-c">Name</th>
+                                <th scope="col" class="txt-c">Categories</th>
+                                <th scope="col" class="txt-c">City</th>
+                                <th scope="col" class="txt-c">Address</th>
+                                <th scope="col" class="txt-c">Postal code</th>
+                                <th scope="col" class="txt-c">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </body>
     
+    <!-------------------------------------- Footer --------------------------------->
     <footer class="mt-3">
         <div class="card text-center" style="background-color:#F8F8F8; border:1px solid lightgray;">
             <div class="card-body mt-1">
@@ -61,3 +112,478 @@
         </div>
     </footer>
 </html>
+
+<script>
+    var data_json = {
+                      "0": {
+                        "address": "4501 E Sunset Rd",
+                        "categories": "Auto Repair, Automotive, Tires, Oil Change Stations",
+                        "city": "Henderson",
+                        "name": "Superior Tire - Goodyear Auto Service Center",
+                        "postal_code": "89014",
+                        "review_count": 120,
+                        "rate": 4.3383606557
+                      },
+                      "1": {
+                        "address": "8190 W Union Hills Dr, Ste 110",
+                        "categories": "Cafes, Arcades, Event Planning & Services, Arts & Entertainment, Restaurants, Playgrounds, Active Life, Coffee & Tea, Party & Event Planning, Kids Activities, Leisure Centers, Food",
+                        "city": "Glendale",
+                        "name": "Playgrounds Fun Zone & Cafe",
+                        "postal_code": "85308",
+                        "review_count": 177,
+                        "rate": 4.3244850025
+                      },
+                      "2": {
+                        "address": "818 N 5th Ave",
+                        "categories": "Food, Coffee & Tea, Cafes, Active Life, Venues & Event Spaces, Restaurants, Playgrounds, Event Planning & Services, Breakfast & Brunch",
+                        "city": "Phoenix",
+                        "name": "The Teapot",
+                        "postal_code": "85003",
+                        "review_count": 100,
+                        "rate": 4.3223997215
+                      },
+                      "3": {
+                        "address": "600 N 4th St, Ste 145",
+                        "categories": "Tattoo, Beauty & Spas",
+                        "city": "Phoenix",
+                        "name": "27 Tattoo Studio",
+                        "postal_code": "85004",
+                        "review_count": 105,
+                        "rate": 4.3191370203
+                      },
+                      "4": {
+                        "address": "2421 W Horizon Ridge Pkwy, Ste 110",
+                        "categories": "Home Services, Real Estate, Real Estate Services, Real Estate Agents, Property Management",
+                        "city": "Henderson",
+                        "name": "Eloff Perez - Las Vegas Realty Specialists - Black & Cherry RE",
+                        "postal_code": "89052",
+                        "review_count": 155,
+                        "rate": 4.3096454965
+                      },
+                      "5": {
+                        "address": "2960 St Rose Pkwy, Ste 170",
+                        "categories": "Pet Stores, Pets",
+                        "city": "Henderson",
+                        "name": "Dog Supplies Outlet",
+                        "postal_code": "89052",
+                        "review_count": 101,
+                        "rate": 4.307461451
+                      },
+                      "6": {
+                        "address": "7135 E Camelback Rd, Ste 180",
+                        "categories": "Real Estate Agents, Real Estate, Home Services, Real Estate Services",
+                        "city": "Scottsdale",
+                        "name": "John Gluch - Gluch Group",
+                        "postal_code": "85251",
+                        "review_count": 204,
+                        "rate": 4.3007328049
+                      },
+                      "7": {
+                        "address": "6505 N 16th St",
+                        "categories": "Fashion, Sports Wear, Shoe Stores, Shopping, Active Life, Outdoor Gear, Sporting Goods",
+                        "city": "Phoenix",
+                        "name": "Runner's Den",
+                        "postal_code": "85016",
+                        "review_count": 110,
+                        "rate": 4.2824275414
+                      },
+                      "8": {
+                        "address": "1335 W University Dr, Ste 4",
+                        "categories": "Desserts, Food, Bakeries, Coffee & Tea",
+                        "city": "Tempe",
+                        "name": "Arai Pastry",
+                        "postal_code": "85281",
+                        "review_count": 108,
+                        "rate": 4.2773776364
+                      },
+                      "9": {
+                        "address": "868 N Gilbert Rd, Ste 101",
+                        "categories": "Pet Sitting, Pets, Pet Services, Pet Boarding, Pet Groomers",
+                        "city": "Gilbert",
+                        "name": "Gilbert Dogs 24/7",
+                        "postal_code": "85234",
+                        "review_count": 113,
+                        "rate": 4.2752062645
+                      },
+                      "10": {
+                        "address": "8034 N 19th Ave",
+                        "categories": "Books, Mags, Music & Video, Shopping, Musical Instruments & Teachers",
+                        "city": "Phoenix",
+                        "name": "Bookmans Entertainment Exchange",
+                        "postal_code": "85021",
+                        "review_count": 174,
+                        "rate": 4.2722996759
+                      },
+                      "11": {
+                        "address": "531 N Stephanie St",
+                        "categories": "Pets, Pet Groomers, Pet Sitting, Pet Services, Pet Stores, Pet Training",
+                        "city": "Henderson",
+                        "name": "PetSmart",
+                        "postal_code": "89014",
+                        "review_count": 111,
+                        "rate": 4.2579387224
+                      },
+                      "12": {
+                        "address": "910 E Pecos Rd",
+                        "categories": "Amusement Parks, Parks, Fitness & Instruction, Trampoline Parks, Active Life, Skate Parks",
+                        "city": "Chandler",
+                        "name": "Xtreme Air Park",
+                        "postal_code": "85225",
+                        "review_count": 109,
+                        "rate": 4.2567834759
+                      },
+                      "13": {
+                        "address": "5831 W Craig Rd, Ste 103",
+                        "categories": "Playgrounds, Kids Activities, Party & Event Planning, Event Planning & Services, Active Life",
+                        "city": "Las Vegas",
+                        "name": "Kids' Club Indoor Playground",
+                        "postal_code": "89130",
+                        "review_count": 101,
+                        "rate": 4.2475523064
+                      },
+                      "14": {
+                        "address": "628 W Craig Rd",
+                        "categories": "Active Life, Amateur Sports Teams, Playgrounds, Parks",
+                        "city": "Las Vegas",
+                        "name": "Craig Ranch Regional Park",
+                        "postal_code": "89032",
+                        "review_count": 128,
+                        "rate": 4.2444187383
+                      },
+                      "15": {
+                        "address": "6015 S Fort Apache Rd, Ste 170",
+                        "categories": "Beauty & Spas, Nail Salons",
+                        "city": "Las Vegas",
+                        "name": "Excellent Nails & Spa",
+                        "postal_code": "89148",
+                        "review_count": 138,
+                        "rate": 4.2438745458
+                      },
+                      "16": {
+                        "address": "4165 N Craftsman Ct",
+                        "categories": "Event Planning & Services, Paint & Sip, Art Classes, Arts & Entertainment, Party & Event Planning, Shopping, Education, Arts & Crafts",
+                        "city": "Scottsdale",
+                        "name": "The Brush Bar",
+                        "postal_code": "85251",
+                        "review_count": 103,
+                        "rate": 4.242746105
+                      },
+                      "17": {
+                        "address": "7222 W Grand Teton Dr",
+                        "categories": "Zoos, Active Life, Specialty Food, Food, Local Services, Community Service/Non-Profit, Fruits & Veggies, Farmers Market",
+                        "city": "Las Vegas",
+                        "name": "The Farm",
+                        "postal_code": "89131",
+                        "review_count": 109,
+                        "rate": 4.2246612956
+                      },
+                      "18": {
+                        "address": "7835 S Rainbow Blvd, Ste 15",
+                        "categories": "Party & Event Planning, Active Life, Art Classes, Local Services, Education, Event Planning & Services, Kids Activities, Child Care & Day Care, Venues & Event Spaces, Playgrounds",
+                        "city": "Las Vegas",
+                        "name": "Fidgets Indoor Playground & Party Place",
+                        "postal_code": "89139",
+                        "review_count": 106,
+                        "rate": 4.2227296076
+                      },
+                      "19": {
+                        "address": "",
+                        "categories": "Photographers, Shopping, Photography Stores & Services, Session Photography, Event Planning & Services, Arts & Entertainment",
+                        "city": "Las Vegas",
+                        "name": "Townsley Portraits",
+                        "postal_code": "89118",
+                        "review_count": 261,
+                        "rate": 4.221044997
+                      },
+                      "20": {
+                        "address": "9160 E Shea Blvd, Ste 110",
+                        "categories": "Golf, Active Life, Arts & Entertainment, Arcades, Indoor Playcentre, Amusement Parks, Mini Golf",
+                        "city": "Scottsdale",
+                        "name": "Glow Putt Mini Golf",
+                        "postal_code": "85260",
+                        "review_count": 155,
+                        "rate": 4.2202880053
+                      },
+                      "21": {
+                        "address": "3415 W Charleston Blvd",
+                        "categories": "Lawyers, Personal Injury Law, Legal Services, Professional Services",
+                        "city": "Las Vegas",
+                        "name": "Robert Sidell Injury Attorney",
+                        "postal_code": "89102",
+                        "review_count": 135,
+                        "rate": 4.2198113947
+                      },
+                      "22": {
+                        "address": "1300 N McClintock Dr, Ste A1",
+                        "categories": "Shopping, Bridal",
+                        "city": "Chandler",
+                        "name": "Uptown Bridal and Boutique",
+                        "postal_code": "85226",
+                        "review_count": 110,
+                        "rate": 4.2194537951
+                      },
+                      "23": {
+                        "address": "3899 E Sunset Rd, Ste 105",
+                        "categories": "Shopping, Fashion, Formal Wear, Bridal",
+                        "city": "Las Vegas",
+                        "name": "Bowties Bridal",
+                        "postal_code": "89120",
+                        "review_count": 120,
+                        "rate": 4.2156258044
+                      },
+                      "24": {
+                        "address": "7345 S Durango Dr, Ste 110",
+                        "categories": "Children's Clothing, Fashion, Hair Salons, Kids Hair Salons, Beauty & Spas, Hair Stylists, Shopping",
+                        "city": "Las Vegas",
+                        "name": "Cookie Cutters Haircuts for Kids",
+                        "postal_code": "89113",
+                        "review_count": 117,
+                        "rate": 4.2146351478
+                      },
+                      "25": {
+                        "address": "5524 Walnut St",
+                        "categories": "Coffee & Tea, Coffee Roasteries, Restaurants, Food, Cafes",
+                        "city": "Pittsburgh",
+                        "name": "The Coffee Tree Roasters",
+                        "postal_code": "15232",
+                        "review_count": 121,
+                        "rate": 4.2127853703
+                      },
+                      "26": {
+                        "address": "8450 W Sahara Ave, Ste 102",
+                        "categories": "Pets, Pet Services, Pet Stores",
+                        "city": "Las Vegas",
+                        "name": "Dog Supplies Outlet",
+                        "postal_code": "89117",
+                        "review_count": 104,
+                        "rate": 4.2125280098
+                      },
+                      "27": {
+                        "address": "4171 S Maryland Pkwy",
+                        "categories": "Florists, Shopping, Flowers & Gifts",
+                        "city": "Las Vegas",
+                        "name": "English Garden Florist",
+                        "postal_code": "89119",
+                        "review_count": 134,
+                        "rate": 4.2100904838
+                      },
+                      "28": {
+                        "address": "680 Mill Ave, Ste 101",
+                        "categories": "American (New), Burgers, Fast Food, Restaurants",
+                        "city": "Tempe",
+                        "name": "Five Guys",
+                        "postal_code": "85281",
+                        "review_count": 130,
+                        "rate": 4.2088111581
+                      },
+                      "29": {
+                        "address": "7350 Prairie Falcon Rd, Ste 120",
+                        "categories": "Active Life, Recreation Centers",
+                        "city": "Las Vegas",
+                        "name": "Gravady",
+                        "postal_code": "89128",
+                        "review_count": 180,
+                        "rate": 4.2069410497
+                      },
+                      "30": {
+                        "address": "4704 W Sahara Ave, Ste 2",
+                        "categories": "Local Flavor, Arts & Entertainment, Toy Stores, Shopping, Tabletop Games, Food, Hobby Shops",
+                        "city": "Las Vegas",
+                        "name": "Meepleville Board Game Cafe",
+                        "postal_code": "89102",
+                        "review_count": 111,
+                        "rate": 4.2065534019
+                      },
+                      "31": {
+                        "address": "2705 W Centennial Pkwy",
+                        "categories": "Oil Change Stations, Automotive, Auto Repair, Tires",
+                        "city": "North Las Vegas",
+                        "name": "Superior Tire - Goodyear Auto Service Center",
+                        "postal_code": "89031",
+                        "review_count": 167,
+                        "rate": 4.2053376087
+                      },
+                      "32": {
+                        "address": "6300 W Oakey Blvd",
+                        "categories": "Community Service/Non-Profit, Active Life, Local Services, Amusement Parks",
+                        "city": "Las Vegas",
+                        "name": "Magical Forest",
+                        "postal_code": "89146",
+                        "review_count": 115,
+                        "rate": 4.1999818996
+                      },
+                      "33": {
+                        "address": "360 Promenade Pl",
+                        "categories": "Children's Museums, Active Life, Event Planning & Services, Museums, Summer Camps, Arts & Entertainment, Local Services, Community Service/Non-Profit, Venues & Event Spaces",
+                        "city": "Las Vegas",
+                        "name": "Discovery Children's Museum",
+                        "postal_code": "89106",
+                        "review_count": 282,
+                        "rate": 4.1991618776
+                      },
+                      "34": {
+                        "address": "653 N Town Center Dr, Ste 606",
+                        "categories": "Dentists, Pediatric Dentists, Health & Medical",
+                        "city": "Las Vegas",
+                        "name": "Summerlin Pediatric Dentistry",
+                        "postal_code": "89144",
+                        "review_count": 106,
+                        "rate": 4.1986401854
+                      },
+                      "35": {
+                        "address": "455 N Galvin Pkwy",
+                        "categories": "Zoos, Active Life, Local Flavor",
+                        "city": "Phoenix",
+                        "name": "Zoolights",
+                        "postal_code": "85008",
+                        "review_count": 122,
+                        "rate": 4.1959565779
+                      },
+                      "36": {
+                        "address": "1301 Las Vegas Blvd S",
+                        "categories": "Fashion, Wedding Chapels, Wedding Planning, Flowers & Gifts, Event Planning & Services, Shopping, Bridal, Florists, Venues & Event Spaces",
+                        "city": "Las Vegas",
+                        "name": "A Little White Wedding Chapel",
+                        "postal_code": "89104",
+                        "review_count": 172,
+                        "rate": 4.1958440176
+                      },
+                      "37": {
+                        "address": "9330 W Sahara Ave, Ste 110",
+                        "categories": "Recreation Centers, Playgrounds, Venues & Event Spaces, Event Planning & Services, Local Services, Party & Event Planning, Kids Activities, Active Life, Child Care & Day Care",
+                        "city": "Las Vegas",
+                        "name": "Kinderland Caf\u00e9",
+                        "postal_code": "89117",
+                        "review_count": 146,
+                        "rate": 4.1942400026
+                      },
+                      "38": {
+                        "address": "",
+                        "categories": "Specialty Schools, Art Schools, Dance Schools, Restaurants, Internet Cafes, Preschools, Education, Food, Custom Cakes, Bakeries, Cupcakes, Desserts",
+                        "city": "Goodyear",
+                        "name": "Cakes By Leah",
+                        "postal_code": "85338",
+                        "review_count": 142,
+                        "rate": 4.1914233325
+                      },
+                      "39": {
+                        "address": "2270 E Williams Field Rd, Ste 114",
+                        "categories": "Coffee & Tea, Food, Bakeries",
+                        "city": "Gilbert",
+                        "name": "Caketini - Gilbert",
+                        "postal_code": "85295",
+                        "review_count": 148,
+                        "rate": 4.1914132707
+                      },
+                      "40": {
+                        "address": "225 N Stephanie St",
+                        "categories": "Party & Event Planning, Playgrounds, Venues & Event Spaces, Kids Activities, Food, Recreation Centers, Event Planning & Services, Restaurants, Pizza, Juice Bars & Smoothies, Active Life",
+                        "city": "Henderson",
+                        "name": "Bouncy World",
+                        "postal_code": "89074",
+                        "review_count": 215,
+                        "rate": 4.1902895129
+                      },
+                      "41": {
+                        "address": "4320 N 7th Ave",
+                        "categories": "Fashion, Bikes, Bike Repair/Maintenance, Sports Wear, Sporting Goods, Local Services, Shopping",
+                        "city": "Phoenix",
+                        "name": "Slippery Pig Bicycles",
+                        "postal_code": "85013",
+                        "review_count": 102,
+                        "rate": 4.1882161834
+                      },
+                      "42": {
+                        "address": "",
+                        "categories": "Desserts, Event Planning & Services, Caterers, Food, Cupcakes, Bakeries",
+                        "city": "Las Vegas",
+                        "name": "Sin City Cupcakes",
+                        "postal_code": "89118",
+                        "review_count": 128,
+                        "rate": 4.1871842923
+                      },
+                      "43": {
+                        "address": "3247 Sammy Davis Jr Dr",
+                        "categories": "Shopping, Adult, Fashion, Lingerie, Women's Clothing",
+                        "city": "Las Vegas",
+                        "name": "Deja Vu Love Boutique",
+                        "postal_code": "89109",
+                        "review_count": 143,
+                        "rate": 4.1848047112
+                      },
+                      "44": {
+                        "address": "3159 W 11th St",
+                        "categories": "Arts & Entertainment, Public Services & Government, Landmarks & Historical Buildings, Local Flavor, Museums",
+                        "city": "Cleveland",
+                        "name": "A Christmas Story House and Museum",
+                        "postal_code": "44109",
+                        "review_count": 185,
+                        "rate": 4.1839361291
+                      },
+                      "45": {
+                        "address": "4115 S Grand Canyon Dr",
+                        "categories": "Hair Salons, Beauty & Spas",
+                        "city": "Las Vegas",
+                        "name": "Snips & Clips 4 Kids",
+                        "postal_code": "89147",
+                        "review_count": 111,
+                        "rate": 4.1830397125
+                      },
+                      "46": {
+                        "address": "4872 W Lake Mead Blvd",
+                        "categories": "Pet Training, Pet Sitting, Pets, Pet Services, Pet Groomers",
+                        "city": "Las Vegas",
+                        "name": "Just Like Home Doggie Hotel And Grooming",
+                        "postal_code": "89108",
+                        "review_count": 163,
+                        "rate": 4.182312569
+                      },
+                      "47": {
+                        "address": "5401 N Hayden Rd",
+                        "categories": "Parks, Pets, Dog Parks, Active Life",
+                        "city": "Scottsdale",
+                        "name": "Chaparral Off Leash Area",
+                        "postal_code": "85250",
+                        "review_count": 183,
+                        "rate": 4.1817554694
+                      },
+                      "48": {
+                        "address": "6870 W Spring Mountain Rd",
+                        "categories": "Pets, Pet Groomers, Pet Stores, Pet Sitting, Pet Services",
+                        "city": "Las Vegas",
+                        "name": "Puppy Town",
+                        "postal_code": "89146",
+                        "review_count": 124,
+                        "rate": 4.1806874124
+                      },
+                      "49": {
+                        "address": "9011 E Indian Bend Rd",
+                        "categories": "Pet Services, Pets, Pet Boarding, Pet Groomers, Pet Sitting",
+                        "city": "Scottsdale",
+                        "name": "Doggie Suites - Scottsdale",
+                        "postal_code": "85250",
+                        "review_count": 112,
+                        "rate": 4.1795482858
+                      }
+                    }
+          
+    for(var key in data_json){
+        var obj = data_json[key];
+        
+        var rank = parseInt(key)+1 ;
+        var address = obj.address;
+        var categories = obj.categories;
+        var city = obj.city;
+        var name = obj.name;
+        var postal_code = obj.postal_code;
+        var rate = parseFloat(obj.rate.toFixed(3));
+        
+        var row = '<tr><th scope>'+rank+'</th><td>'+name+'</td><td>'+categories+'</td><td>'+city+'</td><td>'+address+'</td><td>'+postal_code+'</td><td>'+rate+'</td></tr>';
+        
+        $("tbody").append(row);
+        
+        $("tbody")
+    }
+</script>
+
+
