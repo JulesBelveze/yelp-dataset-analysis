@@ -18,7 +18,7 @@
     margin-bottom: 10px;
 }
 
-.btn-choice-year, .btn-choice-community, .btn-choice-community-2{
+.btn-choice-year, .btn-choice-community, .btn-choice-community-2, .btn-choice-year-2{
     background-color: #F8F8F8 !important;
     border: 1px solid lightgray;
 }
@@ -57,4 +57,8 @@ li a:hover{
 
 .txt-c{
     text-align: center;
+}
+
+select[multiple], select[size]{
+    height: 140px !important;
 }

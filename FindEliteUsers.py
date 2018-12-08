@@ -25,6 +25,9 @@ def getEliteUsers():
     spark_df_users.sort('fans', ascending=True).show()
 
     # writing the dataframe as a .json file
+    spark_df_users_14 = spark_df_users.where(spark_df_users.elite.like('2014'))
+    spark_df_users_14.write.format('json').save("elite_users_2014.json")
+
     spark_df_users_15 = spark_df_users.where(spark_df_users.elite.like('2015'))
     spark_df_users_15.write.format('json').save("elite_users_2015.json")
 
