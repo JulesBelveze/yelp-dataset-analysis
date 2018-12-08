@@ -5,7 +5,6 @@ from pyspark.sql.functions import *
 import pandas as pd
 import os
 import json
-import FindEliteUsers.py
 
 test = True
 dir_path = '../yelp_dataset/'
@@ -20,18 +19,6 @@ def parserByReviewsNb():
     for file in file_list[1:]:
         df = spark.read.json(dir_path + "open_business_reviews.json/" + file)
         pyspark_df_review = pyspark_df_review.union(df)
-
-    # p_schema = StructType([StructField('business_id', StringType(), True),
-    #                        StructField('cool', IntegerType(), True),
-    #                        StructField('date', StringType(), True),
-    #                        StructField('funny', IntegerType(), True),
-    #                        StructField('review_id', StringType(), True),
-    #                        StructField('stars', IntegerType(), True),
-    #                        StructField('text', StringType(), True),
-    #                        StructField('useful', IntegerType(), True),
-    #                        StructField('user_id', StringType(), True)])
-    #
-    # pyspark_df_review = sqlContext.createDataFrame(df_review, p_schema)
 
     pyspark_df_review.createOrReplaceTempView("review")
     pyspark_df_review.createOrReplaceTempView("review2")
@@ -78,6 +65,7 @@ def removeClosedBusinessReviews():
 
     reviews_filter.write.format('json').save('open_business_reviews.json')
     pass
+
 
 def getOpenBusinessClients():
     df_reviews = pd.DataFrame()
@@ -129,8 +117,6 @@ def getOpenBusinessEliteClients():
         json.dump(dic, f, indent=4)
 
 
-
-
 def getUsersWithFriends():
     spark = SparkSession.builder.getOrCreate();
 
@@ -145,6 +131,5 @@ def getUsersWithFriends():
     pass
 
 
-if __name__=="__main__":
-    getOpenBusinessClients()
-    getOpenBusinessEliteClients()
+if __name__ == "__main__":
+    parserByReviewsNb()

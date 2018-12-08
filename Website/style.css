@@ -18,7 +18,7 @@
     margin-bottom: 10px;
 }
 
-.btn-choice-year, .btn-choice-community{
+.btn-choice-year, .btn-choice-community, .btn-choice-community-2{
     background-color: #F8F8F8 !important;
     border: 1px solid lightgray;
 }
@@ -45,4 +45,16 @@ li a:hover{
 
 .mh{
     min-height: 106px !important;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 500px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border:1px black solid;
+}
+
+.txt-c{
+    text-align: center;
 }

@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     
+    <!-------------------------------------- Navigation bar --------------------------------->
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -37,6 +38,7 @@
         </nav>
     </header>
     
+    <!-------------------------------------- work description --------------------------------->
     <body class="mt-8">
         <div class="row">
             <div class="card col-md-10 col-md-offset-1">
@@ -59,10 +61,11 @@
         
         <hr class="col-md-8 col-md-offset-2">
         
+        <!-------------------------------------- business network --------------------------------->
         <div class="row">
             <div class="card col-md-10 col-md-offset-1">
                 <div class="card-header">
-                    <h2>Network of users</h2>
+                    <h2>Network of business</h2>
                 </div>
                 <div class="card-body">
                     <p class="card-text">Here is a quick animation where you can visualize the network of businesses as described above.You can play with two parameters: the year of the elite users that link the businesses and the possibility, or not, to view the different communities inside this network.</p>
@@ -95,15 +98,58 @@
                 </label>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <img class="card-img img-responsive" id="network_img" src="networks_images/network_business_2017.png">
             </div>
         </div>
+        
+        <div class="row">
+            <div class="card col-md-10 col-md-offset-1">
+                <div class="card-body">
+                    <p class="card-text">Since the above layout does not help to visualize how the business are spacially located we have decided to display them with a map background. As we could have imagined business within the same area are linked. But surprisingly there is a lot of connections between business that are located really far one another.</p>
+                </div>
+                <div class="card-body">
+                    <img src="networks_images/map_networks_business.png" class="col-md-8 col-md-offset-2 img-responsive">
+                </div>
+            </div>
+        </div>
+        
+        
+        <hr class="col-md-8 col-md-offset-2">
+        
+        <!-------------------------------------- elite users network --------------------------------->
+        <div class="row">
+            <div class="card col-md-10 col-md-offset-1">
+                <div class="card-header">
+                    <h2>Network of elite users</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Here is a quick animation where .....</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="btn-group btn-group-toggle col-md-5 col-md-offset-1" data-toggle="buttons">
+                <label class="btn btn-choice-community-2 active" data="networks_images/elite_users_network.png">
+                    <input type="radio" name="options" autocomplete="off"> Without communities
+                </label>
+                <label class="btn btn-choice-community-2" data="networks_images/network_elite_users_com.png">
+                    <input type="radio" name="options" autocomplete="off"> With communities
+                </label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <img class="card-img img-responsive" id="network_img_2" src="networks_images/elite_users_network.png">
+            </div>
+        </div>
     </body>
     
     
+    <!-------------------------------------- Footer --------------------------------->
     <footer class="mt-3">
         <div class="card text-center" style="background-color:#F8F8F8; border:1px solid lightgray;">
             <div class="card-body mt-1">
@@ -126,6 +172,10 @@
     $(".btn-choice-year").on("click",function(){
         var img_network = $(this).attr("data") + $(".btn-choice-community.active").attr("data");
         $("#network_img").attr("src", img_network);
+    });
+    
+    $(".btn-choice-community-2").on("click", function(){
+        $("#network_img_2").attr("src", $(this).attr("data"));
     });
 </script>
 
