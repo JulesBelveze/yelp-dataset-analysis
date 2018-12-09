@@ -9,8 +9,10 @@
                 integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     
     <!-------------------------------------- Navigation bar --------------------------------->
@@ -50,11 +52,11 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title"><li>Network of users</li></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">By constructing this network our intention was to identify if the users were grouped into kind of communities. To do so, we picked up influent elite users (we chose them according to their number of friends and reviews) and we draw edges between them and their friends.</p>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title"><li>Network of business</li></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">We have built this network in order to find links between different businesses. The most relevant way of linking businesses for us was to link two businesses if the same user has left a review on both of them.</p>
                 </div>
             </div>
         </div>
@@ -62,7 +64,7 @@
         <hr class="col-md-8 col-md-offset-2">
         
         <!-------------------------------------- business network --------------------------------->
-        <div class="row">
+        <div class="row" id="business_network">
             <div class="card col-md-10 col-md-offset-1">
                 <div class="card-header">
                     <h2>Network of business</h2>
@@ -161,6 +163,43 @@
             </div>
         </div>
     </body>
+    
+    <hr class="col-md-8 col-md-offset-2">
+    <!-------------------------------------- slider --------------------------------->
+    <div class="row">
+            <div class="card col-md-10 col-md-offset-1">
+                <div class="card-header">
+                    <h2>Some users' data</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">In this section you will find three different distribution charts. They depict different users' activities throughout the years.</p>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+            <div class="container">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="user_fan_distribution.png" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="user_friends_distribution.png" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="user_review_distribution.png" class="img-responsive">
+                        </div>
+                    </div>
+
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" style="color:#D1D1D1"></span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" style="color:#D1D1D1"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
     
     
     <!-------------------------------------- Footer --------------------------------->
