@@ -13,9 +13,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        
+
     </head>
-    
+
     <!-------------------------------------- Navigation bar --------------------------------->
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -40,12 +40,12 @@
             </div>
         </nav>
     </header>
-    
+
     <body class="mt-8">
         <div class="row">
             <div class="card col-md-10 col-md-offset-1">
                 <div class="card-header">
-                    <h2>Analyzis of sentiments in comments</h2>
+                    <h2>Analysis of sentiments in comments</h2>
                 </div>
                 <div class="card-body">
                     <p class="card-text">This page depicts our work on comments analysis. Since the aim of our project is to rank is to rank businesses regarding the "happiness" on users' comments, we ended up with different interesting results. <br>
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-------------------------------------- slider --------------------------------->
         <div class="row">
             <div class="container">
@@ -76,9 +76,9 @@
                 </div>
             </div>
         </div>
-        
+
         <hr class="col-md-8 col-md-offset-2">
-        
+
         <!-------------------------------------- sentiments comparison --------------------------------->
         <div class="row">
             <div class="card col-md-10 col-md-offset-1">
@@ -101,11 +101,11 @@
                             <option>Italian</option>
                         </select>
                     </div>
-                    
+
                     <div class="col-md-8">
                         <img src="sentiment_charts/Bars_Nightlife.png" class="img-responsive" id="sentiment_categories">
                     </div>
-                    
+
                     <div class="form-group col-md-2 mt-3">
                         <label for="exampleFormControlSelect2">Second category</label>
                         <select multiple class="form-control" id="selector2">
@@ -121,14 +121,14 @@
                 </div>
             </div>
         </div>
-        
+
         <hr class="col-md-8 col-md-offset-2">
-        
+
         <!-------------------------------------- wordclouds --------------------------------->
         <div class="row" id="wordclouds">
             <div class="card col-md-10 col-md-offset-1">
                 <div class="card-header">
-                    <h2>WordClouds regarding the business's category</h2>
+                    <h2>WordClouds regarding the category of the businesses</h2>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
@@ -137,7 +137,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container mt-3">
             <div class="row">
                 <div class="col-sm-6 mt-3">
@@ -154,7 +154,7 @@
                         <li class="col-sm-3 col-xs-6">
                             <a class="thumbnail" data="wordclouds/Shopping_wordcloud.png"><img src="wordclouds/Shopping_wordcloud.png" class="img-responsive mh" ></a>
                         </li>
-                        
+
 
                         <li class="col-sm-3 col-xs-6">
                             <a class="thumbnail" data="wordclouds/Health_wordcloud.png"><img src="wordclouds/Health_wordcloud.png" class="img-responsive mh"></a>
@@ -195,8 +195,8 @@
             </div>
         </div>
     </body>
-    
-    
+
+
     <!-------------------------------------- Footer -------------------------------------->
     <footer class="mt-3">
         <div class="card text-center" style="background-color:#F8F8F8; border:1px solid lightgray;">
@@ -215,11 +215,11 @@
         var img_url = "sentiment_charts/" + $("#selector1").find(":selected").text() + "_" + $("#selector2").find(":selected").text() + ".png";
         $("#sentiment_categories").attr("src", img_url)
     });
-    
+
     $(".thumbnail").on("click", function(){
         var img_url = $(this).attr("data");
         $("#active-img").attr("src", img_url);
         $(".thumbnail").removeClass("active");
         $(this).addClass("active");
-    });     
+    });
 </script>
